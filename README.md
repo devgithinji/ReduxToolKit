@@ -1,12 +1,6 @@
 # Redux Toolkit
 
-#### React Course
-
-[My React Course](https://www.udemy.com/course/react-tutorial-and-projects-course/?referralCode=FEE6A921AF07E2563CEF)
-
-#### Support
-
-Find the App Useful? [You can always buy me a coffee](https://www.buymeacoffee.com/johnsmilga)
+Click [here](https://redux-toolkit-demo-ke.netlify.app) to visit application
 
 #### Docs
 
@@ -112,13 +106,13 @@ export default cartSlice.reducer;
 - store.js
 
 ```js
-import { configureStore } from '@reduxjs/toolkit';
-import cartReducer from './features/cart/cartSlice';
+import {configureStore} from '@reduxjs/toolkit';
+import cartReducer from './src/features/cart/cartSlice';
 
 export const store = configureStore({
-  reducer: {
-    cart: cartReducer,
-  },
+    reducer: {
+        cart: cartReducer,
+    },
 });
 ```
 
@@ -437,25 +431,25 @@ export default CartItem;
 - App.js
 
 ```js
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import Navbar from './components/Navbar';
 import CartContainer from './components/CartContainer';
-import { useSelector, useDispatch } from 'react-redux';
-import { calculateTotals } from './features/cart/cartSlice';
+import {useSelector, useDispatch} from 'react-redux';
+import {calculateTotals} from './src/features/cart/cartSlice';
 
 function App() {
-  const { cartItems } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(calculateTotals());
-  }, [cartItems]);
+    const {cartItems} = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(calculateTotals());
+    }, [cartItems]);
 
-  return (
-    <main>
-      <Navbar />
-      <CartContainer />
-    </main>
-  );
+    return (
+        <main>
+            <Navbar/>
+            <CartContainer/>
+        </main>
+    );
 }
 
 export default App;
@@ -605,7 +599,6 @@ export default Modal;
 - [Course API](https://course-api.com/)
 - https://course-api.com/react-useReducer-cart-project
 - cartSlice.js
-
 - action type
 - callback function
 - lifecycle actions
@@ -643,30 +636,30 @@ const cartSlice = createSlice({
 - App.js
 
 ```js
-import { calculateTotals, getCartItems } from './features/cart/cartSlice';
+import {calculateTotals, getCartItems} from './src/features/cart/cartSlice';
 
 function App() {
-  const { cartItems, isLoading } = useSelector((state) => state.cart);
+    const {cartItems, isLoading} = useSelector((state) => state.cart);
 
-  useEffect(() => {
-    dispatch(getCartItems());
-  }, []);
+    useEffect(() => {
+        dispatch(getCartItems());
+    }, []);
 
-  if (isLoading) {
+    if (isLoading) {
+        return (
+            <div className='loading'>
+                <h1>Loading...</h1>
+            </div>
+        );
+    }
+
     return (
-      <div className='loading'>
-        <h1>Loading...</h1>
-      </div>
+        <main>
+            {isOpen && <Modal/>}
+            <Navbar/>
+            <CartContainer/>
+        </main>
     );
-  }
-
-  return (
-    <main>
-      {isOpen && <Modal />}
-      <Navbar />
-      <CartContainer />
-    </main>
-  );
 }
 
 export default App;
@@ -698,3 +691,5 @@ export const getCartItems = createAsyncThunk(
   }
 );
 ```
+
+Dennis Githinji 👍
